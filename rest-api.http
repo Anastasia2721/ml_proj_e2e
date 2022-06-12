@@ -9,8 +9,13 @@ Content-Type: application/json
   "renovation": 1
 }
 
+
+
 <> 2022-05-17T234046.200.json
 <> 2022-05-17T233658.200.json
 <> 2022-05-17T233655.200.json
 <> 2022-05-17T233508.200.json
 ###
+
+GET http://localhost:5000/api/predict?open_plan=1&rooms=4&area=1000.53&renovation=1
+Accept: application/json

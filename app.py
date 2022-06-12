@@ -13,8 +13,8 @@ sc_y = joblib.load(SCALER_Y_PATH)
 
 
 @app.route('/')
-def hello_world():
-    return 'POST /api/predict'
+def root_method():
+    return 'GET and POST /api/predict'
 
 
 # JSON for prediction:
@@ -25,15 +25,29 @@ def hello_world():
 #   "renovation": 1
 # }
 @app.route('/api/predict', methods=['POST'])
-def predict():
+def predict_post():
     content = request.json
     app.logger.info('request: %s ', content)
-
     open_plan = content['open_plan']
     rooms = content['rooms']
     area = content['area']
     renovation = content['renovation']
+    return predict(open_plan, rooms, area, renovation)
 
+
+# GET http://localhost:5000?open_plan=1&rooms=4&area=1000.53&renovation=1
+@app.route('/api/predict', methods=['GET'])
+def predict_get():
+    args = request.args
+    app.logger.info('request: %s ', args)
+    open_plan = args.get('open_plan', default=-1, type=int)
+    rooms = args.get('rooms', default=-1, type=int)
+    area = args.get('area', default=-1, type=float)
+    renovation = args.get('renovation', default=-1, type=int)
+    return predict(open_plan, rooms, area, renovation)
+
+
+def predict(open_plan, rooms, area, renovation):
     x = numpy.array([open_plan, rooms, area, renovation]).reshape(1, -1)
     x = sc_x.transform(x)
     result = model.predict(x)
