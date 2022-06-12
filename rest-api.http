@@ -1,0 +1,16 @@
+POST http://localhost:5001/api/predict
+Accept: application/json
+Content-Type: application/json
+
+{
+  "open_plan": 1,
+  "rooms": 100,
+  "area": 2.2,
+  "renovation": 1
+}
+
+<> 2022-05-17T234046.200.json
+<> 2022-05-17T233658.200.json
+<> 2022-05-17T233655.200.json
+<> 2022-05-17T233508.200.json
+###
