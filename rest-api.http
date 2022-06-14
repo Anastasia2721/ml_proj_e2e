@@ -17,5 +17,5 @@ Content-Type: application/json
 <> 2022-05-17T233508.200.json
 ###
 
-GET http://localhost:5000/api/predict?open_plan=1&rooms=4&area=1000.53&renovation=1
+GET http://localhost:5000/api/predict?open_plan=0&rooms=1&area=32&renovation=0
 Accept: application/json
