@@ -5,6 +5,9 @@
 3. VM without using Docker
 4. Info about Dockefile
 5. How to build a Docker container
+6. How to open a port in your VM
+7. How to run app using docker and which port it uses
+
 
 ## 1.Source Data Information
 We used data from [Yandex.Realty](https://realty.yandex.ru) about real estate prices in St. Petersburg for the period of Jan 2017 to Aug 2018.
@@ -57,7 +60,7 @@ CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 ```
 We used `python` image to create our docker containers. Code copies all the content, installs all the required libraries stored in `requirements.txt`, and runs an application `app.py`.
 
-## How to build container using docker
+## 5. How to build container using docker
 Use the set of the following commands to make and launch the containers:
 Build the container:
 
@@ -81,3 +84,25 @@ To stop the container you need to use the callsign of this container and write i
  
 
     docker push st095434/ml_proj_e2e:v1.0
+
+## 6. How to open a port in your VM
+If you want to open a port in your VM, you need to use the following code: `sudo ufw allow <number of the port>` you wish to open. The port number should be the same one you use in your version of the application.
+
+If this port is already in use, you might want to use `htop` in order to stop the process that uses the port. You might need to install `htop` using `sudo apt install htop` before that.
+
+## 7. How to run app using docker and which port it uses
+Our docker is located [here](https://hub.docker.com/r/st095434/ml_proj_e2e) at [Docker Hub](https://hub.docker.com/).
+
+If you want to use it for running an application, you will first need to install docker at your VM using these links:
+1. Install docker engine: https://docs.docker.com/engine/install/ubuntu/
+2. Post-installation steps for Linux: https://docs.docker.com/engine/install/linux-postinstall/
+
+Now you can use `docker pull st095434/ml_proj_e2e:v1.0` to pull the container to your machine. 
+Use the following command: `docker run -d -p 5000:5000 st095434/ml_proj_e2e:v1.0` to run the container with open port `5000`. 
+
+Now you can send GET and POST request on your running application.
+
+Example: `curl -X GET "http://localhost:5000/api/predict?open_plan=0&rooms=1&area=36&renovation=0&model=CB"`
+
+If you want to change the port nuber, update `docker run` parameter.
+To open the port for the VM see 5. How to open a port in your VM for that.
