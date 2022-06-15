@@ -1,12 +1,13 @@
-POST http://localhost:5001/api/predict
+POST http://localhost:5000/api/predict
 Accept: application/json
 Content-Type: application/json
 
 {
-  "open_plan": 1,
+  "open_plan": 0,
   "rooms": 100,
-  "area": 2.2,
-  "renovation": 1
+  "area": 36.0,
+  "renovation": 0,
+  "model": "RF"
 }
 
 
@@ -17,5 +18,5 @@ Content-Type: application/json
 <> 2022-05-17T233508.200.json
 ###
 
-GET http://localhost:5000/api/predict?open_plan=0&rooms=1&area=32&renovation=0
+GET http://localhost:5000/api/predict?open_plan=0&rooms=1&area=36&renovation=0&model=CB
 Accept: application/json
